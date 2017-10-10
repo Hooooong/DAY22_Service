@@ -42,7 +42,7 @@ ____________________________________________________
 
       > Service 를 Bind 하려면 어플리케이션 구성요소가 `bindService()` 를 호출하여 시작한다. `bindService()` 를 호출하면 `onBind()` 가 실행된다.
 
-      - Service 를 `bindService()` 로 시작하면 지속가능한 서비스와 연결을 생성한다.
+      - Service 를 `bindService()` 로 시작하면 지속가능한 Service 와 연결을 생성한다.
 
       - `bindService()` 는 `ServiceConnection` 객체를 통해 Service 의 bind 상태와 결과를 받아올 수 있다.
 
@@ -50,7 +50,7 @@ ____________________________________________________
       // System 자체에서 Intent 를 통해 Service 를 호출하기 때문에 MyService 를 접근할 방법이 없다.
       // 그러기 때문에 Connection 객체와 데이터에 접근할 수 있는 Binder 를 제공한다.
       ServiceConnection con = new ServiceConnection() {
-          // 서비스와 연결되는 순간 호출되는 함수
+          // Service 와 연결되는 순간 호출되는 함수
           @Override
           public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
               // onServiceConnected 가 호출이 되면 IBinder 객체를 넘겨받을 수 있다.
@@ -58,7 +58,7 @@ ____________________________________________________
               MyService myservice = ((MyService.CustomBinder) iBinder).getService();
           }
 
-          // 서비스가 중단되거나 연결이 도중에 끊겼을 때 발생한다.
+          // Service 가 중단되거나 연결이 도중에 끊겼을 때 발생한다.
           // 예 ) 정삭적으로 stop 이 호출이 되고, onDestroy 가 발생하면 onServiceDisconnected() 가 호출이 되지 않는다.
           @Override
           public void onServiceDisconnected(ComponentName componentName) {
@@ -101,10 +101,10 @@ ____________________________________________________
 
   메소드 | 설명
   :----: | :----:
-  onCreate() | 서비스가 생성되어 일회성 절차를 수행(onStartCommand() 또는 onBind() 호출하기 전에).<br> 서비스가 이미 실행중인 경우, 이 메소드는 호출되지 않는다
-  onStartCommand() | startService() 를 호출하면 실행되는 메소드. <br>이 메소드가 실행되면 백그라운드에서 무기한으로 실행될 수 있고,서비스의 작업이 완료되었을 때 해당 서비스를 중단하는 것은 개발자 본인의 책임이며, 이때 stopSelf() 또는 stopService()를 호출하면 된다
-  onBind() | bindService() 를 호출하면 실행되는 메소드.<br> onBind() 를 호출하기 위해서는 ServiceConnection 를 제공해야 한다
-  onUnbind() | unbindService() 를 호출하면 실행되는 메소드.
-  onDestroy() | 해당 서비스를 더 이상 사용하지 않고 소멸시키는 경우 호출
+  onCreate() | Service 가 생성되어 일회성 절차를 수행(onStartCommand() 또는 onBind() 호출하기 전에).<br> Service 가 이미 실행중인 경우, 이 메소드는 호출되지 않는다
+  onStartCommand() | startService() 를 호출하면 실행되는 메소드. <br>이 메소드가 실행되면 백그라운드에서 무기한으로 실행될 수 있고, Service 의 작업이 완료되었을 때 해당 Service 를 중단하는 것은 개발자 본인의 책임이며, 이때 stopSelf() 또는 stopService()를 호출하면 된다
+  onBind() | bindService() 를 호출하면 실행되는 메소드.<br> onBind() 를 호출하기 위해서는 ServiceConnection 를 제공해야 한다.<br> 이 메소드 또한 백그라운드에서 무기한으로 실행될 수 있으며, unbindService() 를 호출하여 Service 의 bind 를 해제한다
+  onUnbind() | unbindService() 를 호출하면 실행되는 메소드. Service 의 bind 를 해제한다
+  onDestroy() | 해당 Service 를 더 이상 사용하지 않고 소멸시키는 경우 호출
 
 - 참조 : [Android Service](https://developer.android.com/guide/components/services.html?hl=ko#Foreground)

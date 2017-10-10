@@ -51,6 +51,13 @@ public class MyService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.d("MyService", "---------onBind()");
+        for(int i = 0 ; i<1000; i++){
+            total += i;
+            System.out.println(i + "");
+            /*if(i == 999){
+                stopSelf(startId);
+            }*/
+        }
         return iBinder;
     }
 
