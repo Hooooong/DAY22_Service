@@ -5,7 +5,7 @@ Android Programing
 #### 예제
 ____________________________________________________
 
-- [Service 예제]()
+- [Service 예제](https://github.com/Hooooong/DAY22_Service/blob/master/app/src/main/java/com/hooooong/servicebasic/MyService.java)
 
 #### 공부정리
 ____________________________________________________
@@ -22,7 +22,7 @@ ____________________________________________________
 
 - Service 실행 방법
 
-  1. `start`
+  1. __start__
 
       > Service 를 시작하려면 어플리케이션 구성요소(에 : Activity)가 `startService()` 를 호출하여 시작한다. `startService()` 를 호출하면 `onStartCommand()` 가 실행된다.
 
@@ -38,7 +38,7 @@ ____________________________________________________
 
       - `startService()` 를 호출하고, 작업을 완료했으면 `stopSelf()` 또는 `stopService()` 를 호출하여 Service 를 중단시켜야 한다.
 
-  2. `bind`
+  2. __bind__
 
       > Service 를 Bind 하려면 어플리케이션 구성요소가 `bindService()` 를 호출하여 시작한다. `bindService()` 를 호출하면 `onBind()` 가 실행된다.
 
@@ -47,6 +47,8 @@ ____________________________________________________
       - `bindService()` 는 `ServiceConnection` 객체를 통해 Service 의 bind 상태와 결과를 받아올 수 있다.
 
       ```java
+      // System 자체에서 Intent 를 통해 Service 를 호출하기 때문에 MyService 를 접근할 방법이 없다.
+      // 그러기 때문에 Connection 객체와 데이터에 접근할 수 있는 Binder 를 제공한다.
       ServiceConnection con = new ServiceConnection() {
           // 서비스와 연결되는 순간 호출되는 함수
           @Override
@@ -95,6 +97,14 @@ ____________________________________________________
 
 - Service 생명 주기
 
-  -
+  ![Service 생명주기]()
+
+  메소드 | 설명
+  :----: | :----:
+  onCreate() | 서비스가 생성되어 일회성 절차를 수행(onStartCommand() 또는 onBind() 호출하기 전에).<br> 서비스가 이미 실행중인 경우, 이 메소드는 호출되지 않는다
+  onStartCommand() | startService() 를 호출하면 실행되는 메소드. 이 메소드가 실행되면 백그라운드에서 무기한으로 실행될 수 있고,<br>서비스의 작업이 완료되었을 때 해당 서비스를 중단하는 것은 개발자 본인의 책임이며, 이때 stopSelf() 또는 stopService()를 호출하면 된다
+  onBind() | bindService() 를 호출하면 실행되는 메소드. onBind() 를 호출하기 위해서는 ServiceConnection 를 제공해야 한다
+  onUnbind() | unbindService() 를 호출하면 실행되는 메소드.
+  onDestroy() | 해당 서비스를 더 이상 사용하지 않고 소멸시키는 경우 호출
 
 - 참조 : [Android Service](https://developer.android.com/guide/components/services.html?hl=ko#Foreground)
