@@ -97,13 +97,13 @@ ____________________________________________________
 
 - Service 생명 주기
 
-  ![Service 생명주기]()
+  ![Service 생명주기](https://github.com/Hooooong/DAY22_Service/blob/master/image/Service%20lifecycle.png)
 
   메소드 | 설명
   :----: | :----:
   onCreate() | 서비스가 생성되어 일회성 절차를 수행(onStartCommand() 또는 onBind() 호출하기 전에).<br> 서비스가 이미 실행중인 경우, 이 메소드는 호출되지 않는다
-  onStartCommand() | startService() 를 호출하면 실행되는 메소드. 이 메소드가 실행되면 백그라운드에서 무기한으로 실행될 수 있고,<br>서비스의 작업이 완료되었을 때 해당 서비스를 중단하는 것은 개발자 본인의 책임이며, 이때 stopSelf() 또는 stopService()를 호출하면 된다
-  onBind() | bindService() 를 호출하면 실행되는 메소드. onBind() 를 호출하기 위해서는 ServiceConnection 를 제공해야 한다
+  onStartCommand() | startService() 를 호출하면 실행되는 메소드. <br>이 메소드가 실행되면 백그라운드에서 무기한으로 실행될 수 있고,서비스의 작업이 완료되었을 때 해당 서비스를 중단하는 것은 개발자 본인의 책임이며, 이때 stopSelf() 또는 stopService()를 호출하면 된다
+  onBind() | bindService() 를 호출하면 실행되는 메소드.<br> onBind() 를 호출하기 위해서는 ServiceConnection 를 제공해야 한다
   onUnbind() | unbindService() 를 호출하면 실행되는 메소드.
   onDestroy() | 해당 서비스를 더 이상 사용하지 않고 소멸시키는 경우 호출
 
