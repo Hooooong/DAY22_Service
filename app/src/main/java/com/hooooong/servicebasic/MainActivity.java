@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     // 서비스 시작
     public void start(View view) {
+        intent.setAction("START");
         startService(intent);
     }
 
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             isService = true;
+            // 최초로 연결될 때 호출이 한번 된다.
             // onServiceConnected 가 호출이 되면 IBinder 객체를 넘겨받을 수 있다.
             // Service 내부 객체에서 IBinder Interface 를 구현한 Binder 를 상속받아야한다.
             service = ((MyService.CustomBinder) iBinder).getService();
